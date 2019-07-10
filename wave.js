@@ -10,8 +10,7 @@ var w,
   mouse = [0, 0],
   pathHeight;
 
-vis.append("rect").attr("fill", "white");
-const wave = vis.append("path").attr("fill", "red");
+const wave = vis.append("path").attr("fill", "lightblue");
 
 var line = d3.line().curve(d3.curveBasis);
 
@@ -61,15 +60,16 @@ d3.select(window).on("resize", init);
 
 init();
 
+step(100);
 d3.timer(step);
 
 function step(elapsed) {
-  pathHeight += (h / 2 - mouse[1] - pathHeight) / 10;
+  // pathHeight += (h / 2 - mouse[1] - pathHeight) / 10;
 
   for (var i = 1; i < points; i++) {
     const sinSeed = elapsed / 10 + (i + (i % 10)) * 100;
-    const sinHeight = Math.sin(sinSeed / 200) * pathHeight;
-    path[i][1] = Math.sin(sinSeed / 1000) * sinHeight + h / 2;
+    // const sinHeight = Math.sin(sinSeed / 200) * pathHeight;
+    path[i][1] = Math.sin(sinSeed / 100) *  Math.sin(sinSeed / 200) * 100 + h / 1.1;
   }
   wave.attr("d", line(path));
 }
