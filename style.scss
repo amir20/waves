@@ -1,16 +1,5 @@
 @charset "utf-8";
 
-$purple: #8a4d76;
-$pink: #fa7c91;
-
-$beige-light: #d0d1cd;
-$beige-lighter: #eff0eb;
-
-$grey-light: $beige-light;
-$primary: $purple;
-$link: $pink;
-$body-background-color: $beige-lighter;
-
 @import "~bulma/sass/utilities/_all.sass";
 
 @import "~bulma/sass/base/_all.sass";
@@ -25,9 +14,19 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.title, .subtitle {
+  font-family: "Playfair Display", serif;
+}
+
 #vis {
+  z-index: 1;
   opacity: 0.25;
   transform: scaleY(-1);
   position: absolute;
   top: -5px;
+}
+
+#content {
+  position: relative;
+  z-index: 2;
 }
