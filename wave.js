@@ -1,18 +1,19 @@
-// Based on http://paperjs.org/examples/smoothing/
-var w,
-  h,
-  vis = d3
+import * as d3 from "d3";
+
+const vis = d3
     .select("#vis")
     .append("svg")
     .attr("pointer-events", "all"),
-  points = 10,
+  points = 10;
+
+const wave = vis.append("path").attr("fill", "lightblue");
+const line = d3.line().curve(d3.curveBasis);
+
+let w,
+  h,
   path,
   mouse = [0, 0],
   pathHeight;
-
-const wave = vis.append("path").attr("fill", "lightblue");
-
-var line = d3.line().curve(d3.curveBasis);
 
 function init() {
   var oldh = h;
@@ -39,37 +40,24 @@ function init() {
   }
 }
 
-// vis
-//     .on("mousemove", function() {
-//       mouse = d3.mouse(this);
-//       vis.select("path").attr("fill", fill(mouse[1]));
-//       d3.event.preventDefault();
-//     })
-//     .on("touchmove", function() {
-//       var touches = d3.touches(this);
-//       if (touches.length === 0) return;
-//       mouse = touches[0];
-//       vis.select("path").attr("fill", fill(mouse[1]));
-//       d3.event.preventDefault();
-//     })
-//     .on("mousedown", function() {
-//       line.interpolate(interpolators[interpolator = (interpolator + 1) % interpolators.length]);
-//     })
+vis.on("mousemove", function() {
+  mouse = d3.mouse(this);
+  d3.event.preventDefault();
+});
 
 d3.select(window).on("resize", init);
 
 init();
 
-step(100);
 d3.timer(step);
 
 function step(elapsed) {
-  // pathHeight += (h / 2 - mouse[1] - pathHeight) / 10;
+  pathHeight += (h / 2 - (mouse[1] / 2 + mouse[0] / 2) - pathHeight) / 10;
 
   for (var i = 1; i < points; i++) {
     const sinSeed = elapsed / 10 + (i + (i % 10)) * 100;
-    // const sinHeight = Math.sin(sinSeed / 200) * pathHeight;
-    path[i][1] = Math.sin(sinSeed / 100) *  Math.sin(sinSeed / 200) * 100 + h / 1.1;
+    path[i][1] =
+      Math.sin(sinSeed / 100) * Math.sin(sinSeed / 200) * pathHeight + h / 1.1;
   }
   wave.attr("d", line(path));
 }

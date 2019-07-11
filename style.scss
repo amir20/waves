@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+$purple: #8a4d76;
+$pink: #fa7c91;
+
+$beige-light: #d0d1cd;
+$beige-lighter: #eff0eb;
+
+$grey-light: $beige-light;
+$primary: $purple;
+$link: $pink;
+$body-background-color: $beige-lighter;
+
+@import "~bulma/sass/utilities/_all.sass";
+
+@import "~bulma/sass/base/_all.sass";
+@import "~bulma/sass/layout/hero.sass";
+@import "~bulma/sass/grid/columns.sass";
+@import "~bulma/sass/elements/title.sass";
+@import "~bulma/sass/elements/button.sass";
+@import "~bulma/sass/utilities/mixins.sass";
+
+body {
+  background: whitesmoke;
+  font-family: "Roboto", sans-serif;
+}
+
+#vis {
+  opacity: 0.25;
+  transform: scaleY(-1);
+  position: absolute;
+  top: -5px;
+}

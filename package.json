@@ -1,0 +1,34 @@
+{
+  "name": "waves",
+  "version": "1.0.0",
+  "description": "",
+  "main": "wave.js",
+  "scripts": {
+    "prebuild": "npx del dist",
+    "build": "npx parcel build index.html",
+    "dev": "npx parcel index.html",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amir20/waves.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amir20/waves/issues"
+  },
+  "homepage": "https://github.com/amir20/waves#readme",
+  "dependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/plugin-transform-runtime": "^7.5.0",
+    "autoprefixer": "^9.6.1",
+    "bulma": "^0.7.5",
+    "d3": "^5.9.7",
+    "del-cli": "^2.0.0",
+    "parcel-bundler": "^1.12.3",
+    "postcss-font-magician": "^2.2.2",
+    "sass": "^1.22.3"
+  }
+}
