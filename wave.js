@@ -19,7 +19,7 @@ const vis = d3
     .attr("pointer-events", "all"),
   points = 10;
 
-const wave = vis.append("path").attr("fill", "lightblue");
+const wave = vis.append("path").attr("fill", "#4b6584");
 const shape = d3.line().curve(d3.curveBasis);
 
 let w,
@@ -40,12 +40,12 @@ function init() {
     .attr("height", h);
   if (!oldh) {
     path = [];
-    path.push([0, h]);
-    for (var i = 1; i < points; i++) path.push([(w / points) * i, h / 4]);
-    path.push([w, h]);
+    path.push([-100, h]);
+    for (var i = 0; i < points; i++) path.push([(w / points) * i, h / 4]);
+    path.push([w + 100, h]);
     pathHeight = h / 2;
   } else {
-    for (var i = 0; i <= points; i++) {
+    for (var i = 1; i < points + 1; i++) {
       path[i][0] = (w / points) * i;
       path[i][1] = (path[i][1] / oldh) * h;
     }
@@ -53,8 +53,8 @@ function init() {
   }
 }
 
-vis.on("mousemove", function() {
-  mousePosition = d3.mouse(this);
+window.addEventListener("mousemove", function(e) {
+  mousePosition = [Math.min(e.clientX, 600), e.clientY];
 });
 
 d3.select(window).on("resize", init);
@@ -63,11 +63,12 @@ function step(elapsed) {
   pathHeight +=
     (h / 2 - (mousePosition[1] / 2 + mousePosition[0] / 2) - pathHeight) / 10;
 
-  for (var i = 1; i < points; i++) {
+  for (var i = 1; i < points + 1; i++) {
     const sinSeed = elapsed / 10 + (i + (i % 10)) * 100;
     path[i][1] =
       Math.sin(sinSeed / 100) * Math.sin(sinSeed / 200) * pathHeight + h / 1.1;
   }
+
   wave.attr("d", shape(path));
 }
 
