@@ -19,7 +19,7 @@ const vis = d3
     .attr("pointer-events", "all"),
   points = 10;
 
-const wave = vis.append("path").attr("fill", "#4b6584");
+const wave = vis.append("path").attr("class", "wave");
 const shape = d3.line().curve(d3.curveBasis);
 
 let w,
@@ -64,7 +64,7 @@ function step(elapsed) {
     (h / 2 - (mousePosition[1] / 2 + mousePosition[0] / 2) - pathHeight) / 10;
 
   for (var i = 1; i < points + 1; i++) {
-    const sinSeed = elapsed / 10 + (i + (i % 10)) * 100;
+    const sinSeed = elapsed / 6 + (i + (i % 10)) * 100;
     path[i][1] =
       Math.sin(sinSeed / 100) * Math.sin(sinSeed / 200) * pathHeight + h / 1.1;
   }
